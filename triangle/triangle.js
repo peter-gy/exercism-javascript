@@ -1,28 +1,27 @@
 export class Triangle {
 
-  constructor(sideA, sideB, sideC) {
-    this.sideA = sideA;
-    this.sideB = sideB;
-    this.sideC = sideC;
+  constructor(...sides) {
+    this.sides = sides;
+    this.sideSet = new Set([...this.sides]);
   }
 
   isEquilateral() {
-    return this.isValid() && (this.sideA === this.sideB && this.sideB === this.sideC);
+    return this.isValid() && this.sideSet.size === 1;
   }
 
   isIsosceles() {
-    return this.isValid() && (this.sideA === this.sideB || this.sideA === this.sideC || this.sideB === this.sideC);
+    return this.isValid() && (this.sideSet.size === 1 || this.sideSet.size === 2);
   }
 
   isScalene() {
-    return this.isValid() && (this.sideA != this.sideB && this.sideB != this.sideC);
+    return this.isValid() && this.sideSet.size === 3;
   }
 
   isValid() {
-    return (this.sideA > 0 && this.sideB > 0 && this.sideC > 0) &&
-    this.sideA + this.sideB >= this.sideC && 
-    this.sideA + this.sideC >= this.sideB && 
-    this.sideB + this.sideC >= this.sideA;
+    const [a, b, c] = this.sides;
+    const triangleInequalityHolds = a + b >= c && a + c >= b && b + c >= a;
+    const sidesArePositive = this.sides.every(side => side > 0);
+    return triangleInequalityHolds && sidesArePositive;
   }
 
 }
