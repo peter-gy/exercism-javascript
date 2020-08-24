@@ -1,3 +1,1 @@
-export const reverseString = string => {
-  return string === "" ? "" : reverseString(string.substr(1)) + string.charAt(0);
-};
+export const reverseString = str => str === "" ? "" : reverseString(str.substr(1)) + str.charAt(0);
