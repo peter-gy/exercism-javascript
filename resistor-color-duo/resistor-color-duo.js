@@ -11,4 +11,4 @@ const colorCodes = {
   white: 9,
 }
 
-export const decodedValue = colors => parseInt('' + colorCodes[colors[0]] + colorCodes[colors[1]]);
+export const decodedValue = colors => 10*colorCodes[colors[0]] + colorCodes[colors[1]]
